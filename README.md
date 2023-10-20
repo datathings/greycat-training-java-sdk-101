@@ -31,7 +31,7 @@ This introductory training will guide you through the basics of the GreyCat Java
           <dependency>
               <groupId>ai.greycat</groupId>
               <artifactId>sdk</artifactId>
-               <version>${greycat.version}</version>
+              <version>${greycat.version}</version>
           </dependency>
       </dependencies>
       […]
