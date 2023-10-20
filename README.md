@@ -1,6 +1,6 @@
 # Java SDK 101
 
-his introductory training will guide you through the basics of the GreyCat Java SDK.
+This introductory training will guide you through the basics of the GreyCat Java SDK.
 
 ## Prerequisites
 
@@ -25,6 +25,15 @@ his introductory training will guide you through the basics of the GreyCat Java 
         <greycat.version.minor>9</greycat.version.minor>
         <greycat.version>${greycat.version.major}.${greycat.version.minor}-${greycat.version.branch}</greycat.version>
       </properties>
+      […]
+      <dependencies>
+          […]
+          <dependency>
+              <groupId>ai.greycat</groupId>
+              <artifactId>sdk</artifactId>
+               <version>${greycat.version}</version>
+          </dependency>
+      </dependencies>
       […]
       <repositories>
         […]
