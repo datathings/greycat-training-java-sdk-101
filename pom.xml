@@ -12,8 +12,8 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <!-- GreyCat version variables -->
         <greycat.version.branch>testing</greycat.version.branch>
-        <greycat.version.major>6.3</greycat.version.major>
-        <greycat.version.minor>9</greycat.version.minor>
+        <greycat.version.major>6.4</greycat.version.major>
+        <greycat.version.minor>1</greycat.version.minor>
         <greycat.version>${greycat.version.major}.${greycat.version.minor}-${greycat.version.branch}</greycat.version>
     </properties>
     <dependencies>
