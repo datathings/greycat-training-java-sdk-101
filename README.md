@@ -20,9 +20,9 @@ This introductory training will guide you through the basics of the GreyCat Java
       […]
       <properties>
         […]
-        <greycat.version.branch>dev</greycat.version.branch>
-        <greycat.version.major>6.3</greycat.version.major>
-        <greycat.version.minor>9</greycat.version.minor>
+        <greycat.version.branch>testing</greycat.version.branch>
+        <greycat.version.major>6.4</greycat.version.major>
+        <greycat.version.minor>1</greycat.version.minor>
         <greycat.version>${greycat.version.major}.${greycat.version.minor}-${greycat.version.branch}</greycat.version>
       </properties>
       […]
