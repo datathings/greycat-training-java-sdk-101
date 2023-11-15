@@ -1,3 +1,6 @@
 /.idea/
 /gcdata/
 /target/
+/build/
+/gradle/
+/.gradle/
