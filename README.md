@@ -20,8 +20,8 @@ This introductory training will guide you through the basics of the GreyCat Java
       […]
       <properties>
         […]
-        <greycat.version.branch>testing</greycat.version.branch>
-        <greycat.version.major>6.4</greycat.version.major>
+        <greycat.version.branch>dev</greycat.version.branch>
+        <greycat.version.major>6.5</greycat.version.major>
         <greycat.version.minor>1</greycat.version.minor>
         <greycat.version>${greycat.version.major}.${greycat.version.minor}-${greycat.version.branch}</greycat.version>
       </properties>
@@ -48,9 +48,31 @@ This introductory training will guide you through the basics of the GreyCat Java
     </project>
     ```
   - Gradle:
-    ```json
-    TODO
+    ```Groovy
+    plugins {
+        id 'java-library'
+        id 'maven-publish'
+        // Added this to run the main class for testing
+        id 'application'
+    }
+
+    application {
+      mainClass = System.getProperty('mainClass')
+    }
+
+    // Applying the plugin that we specified
+    apply plugin: 'application'
     ```
+
+  Now you can simply build & compile the project
+
+    ```bash
+    // For linux and mac
+    ./gradlew wrapper --gradle-version 8.4
+    // For windows
+    gradlew.bat wrapper --gradle-version 8.4
+    ```
+
 As the version above is doomed to be outdated, more recent versions can be checked at https://get.greycat.io/files/sdk/java/testing/
 
 ## GreyCat server application
@@ -67,7 +89,7 @@ The server consists of an example dataset (a `nodeList` of 10 integers) and thre
 
   public final class HelloWorld {
     public static void main(String... args) throws Exception {
-      GreyCat greycat = new GreyCat("http://localhost:8080");
+      GreyCat greycat = new GreyCat("http://localhost:8080", null, null, null);
     } 
   }
   ```
@@ -84,13 +106,17 @@ The server consists of an example dataset (a `nodeList` of 10 integers) and thre
 - Then you can call the endpoint in Java with the following code, considering the helloWorld function is stored in `project.gcl`:
   ```java
   […]
-  GreyCat.call(greycat, "project::helloWorld");
+  greycat.call("project::helloWorld");
   […]
   ```
 - Expectedly, this call results in a greeting printed on GreyCat server logging stack.
 - To run this test from command-line:
   ```bash
     mvn package exec:java -Dexec.mainClass=HelloWorld
+  ```
+- To run with Gradle
+  ```bash
+    ./gradlew run -DmainClass=HelloWorld
   ```
 
 ### Getting data
@@ -109,7 +135,7 @@ The server consists of an example dataset (a `nodeList` of 10 integers) and thre
 - Expectedly, in Java data can be easily gathered with:
   ```java
   […]
-  std.core.Array<?> data = (std.core.Array<?>) GreyCat.call(greycat, "project::getData");
+  std.core.Array<?> data = (std.core.Array<?>) greycat.call("project::getData");
   […]
   ```
 - GreyCat integers, as they are stored signed on 64 bits, map to `long` integers in Java:
@@ -121,10 +147,18 @@ The server consists of an example dataset (a `nodeList` of 10 integers) and thre
   // Type: class ai.greycat.std$core$Array<class java.lang.Long>
   […]
   ```
-- To run this test from command-line:
-  ```bash
-    mvn package exec:java -Dexec.mainClass=GetData
-  ```
+- Run the project
+  - To run this test from command-line with **Maven**
+    
+    ```bash
+      mvn package exec:java -Dexec.mainClass=GetData
+    ```
+
+  - To run with Gradle
+
+    ```bash
+      ./gradlew run -DmainClass=GetData
+    ```
 
 ### Sending data
 
@@ -140,7 +174,7 @@ The server consists of an example dataset (a `nodeList` of 10 integers) and thre
 - In Java, the call method of the GreyCat class accepts trailing variadic parameters to be sent to the GreyCat endpoint:
   ```java
   […]
-  String greeting = (String) GreyCat.call(greycat, "project::greet", "John", "Doe");
+  String greeting = (String) greycat.call("project::greet", "John", "Doe");
   System.out.println(greeting);
   […]
   ```
@@ -148,4 +182,8 @@ The server consists of an example dataset (a `nodeList` of 10 integers) and thre
 - To run this test from command-line:
   ```bash
     mvn package exec:java -Dexec.mainClass=Greet
+  ```
+- To run with Gradle
+  ```bash
+    ./gradlew run -DmainClass=Greet
   ```
