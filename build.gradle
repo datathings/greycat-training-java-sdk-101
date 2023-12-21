@@ -9,8 +9,7 @@ plugins {
 }
 
 application {
-    // We are using GetData as the main class
-    mainClassName = 'GetData'
+    mainClass = System.getProperty('mainClass')
 }
 
 apply plugin: 'application'

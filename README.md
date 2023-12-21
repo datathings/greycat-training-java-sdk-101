@@ -70,9 +70,8 @@ This introductory training will guide you through the basics of the GreyCat Java
         id 'application'
     }
 
-    // Add this block to specify the main class. We are putting GetData, just for demonstration
     application {
-        mainClassName = 'GetData'
+      mainClass = System.getProperty('mainClass')
     }
 
     // Applying the plugin that we specified
@@ -123,6 +122,33 @@ This introductory training will guide you through the basics of the GreyCat Java
         options.encoding = 'UTF-8'
     }
     ```
+    
+  *We added a few lines into Gradle **build.gradle** file. Please make sure that you include them.*
+
+    ```Groovy
+    plugins {
+        id 'java-library'
+        id 'maven-publish'
+        // Added this to run the main class for testing
+        id 'application'
+    }
+
+    application {
+      mainClass = System.getProperty('mainClass')
+    }
+
+    // Applying the plugin that we specified
+    apply plugin: 'application'
+    ```
+
+  Now you can simply build & compile the project
+
+    ```bash
+    // For linux and mac
+    ./gradlew
+    // For windows
+    gradlew.bat
+    ```
 
 As the version above is doomed to be outdated, more recent versions can be checked at https://get.greycat.io/files/sdk/java/testing/
 
@@ -165,6 +191,10 @@ The server consists of an example dataset (a `nodeList` of 10 integers) and thre
   ```bash
     mvn package exec:java -Dexec.mainClass=HelloWorld
   ```
+- To run with Gradle
+  ```bash
+    ./gradlew run -DmainClass=HelloWorld
+  ```
 
 ### Getting data
 
@@ -201,43 +231,10 @@ The server consists of an example dataset (a `nodeList` of 10 integers) and thre
       mvn package exec:java -Dexec.mainClass=GetData
     ```
 
-  - To run this test from command-line with **Gradle**
-    
-    *We added a few lines to plugin the our tutorial's GetData main class into Gradle **build.gradle** file. Please make sure that you include them.*
-
-    ```Groovy
-    plugins {
-        id 'java-library'
-        id 'maven-publish'
-        // Added this to run the main class for testing
-        id 'application'
-    }
-
-    // Add this block to specify the main class. We are putting GetData, just for demonstration
-    application {
-        mainClassName = 'GetData'
-    }
-
-    // Applying the plugin that we specified
-    apply plugin: 'application'
-    ```
-
-    Now you can simply build & compile the project
+  - To run with Gradle
 
     ```bash
-    // For linux and mac
-    ./gradlew
-    // For windows
-    gradlew.bat
-    ```
-
-    Run the project and get your data from Greycat server!
-
-    ```bash
-    // For linux and mac
-    ./gradlew run
-    // For window
-    gradlew.bat run
+      ./gradlew run -DmainClass=HelloWorld
     ```
 
 ### Sending data
@@ -262,4 +259,8 @@ The server consists of an example dataset (a `nodeList` of 10 integers) and thre
 - To run this test from command-line:
   ```bash
     mvn package exec:java -Dexec.mainClass=Greet
+  ```
+- To run with Gradle
+  ```bash
+    ./gradlew run -DmainClass=Greet
   ```
